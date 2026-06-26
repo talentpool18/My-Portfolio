@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Neha Pujari | Consultancy Services</title>
+<style>
+  :root {
+    --gold: #C48E21;
+    --rose: #bf675f;
+    --dark: #0f0f0f;
+    --dark2: #1a1a1a;
+    --dark3: #242424;
+    --light: #f5f0e8;
+    --text: #e0d8cc;
+    --muted: #999;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--dark);color:var(--text);font-family:'Segoe UI',sans-serif;line-height:1.6;}
+
+  /* NAV */
+  nav{position:fixed;top:0;width:100%;background:rgba(15,15,15,0.95);backdrop-filter:blur(10px);z-index:1000;padding:14px 40px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(196,142,33,0.2);}
+  .logo{font-size:1.3rem;font-weight:700;color:var(--gold);letter-spacing:1px;}
+  .logo span{color:var(--rose);}
+  .nav-links a{color:var(--text);text-decoration:none;margin-left:24px;font-size:0.9rem;transition:color 0.3s;}
+  .nav-links a:hover{color:var(--gold);}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 20px 60px;background:radial-gradient(ellipse at top,rgba(196,142,33,0.12) 0%,transparent 60%),radial-gradient(ellipse at bottom right,rgba(191,103,95,0.1) 0%,transparent 50%),var(--dark);}
+  .hero-badge{display:inline-block;background:rgba(196,142,33,0.15);border:1px solid rgba(196,142,33,0.4);color:var(--gold);padding:6px 18px;border-radius:20px;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;}
+  .hero h1{font-size:clamp(2rem,5vw,3.8rem);font-weight:800;line-height:1.15;margin-bottom:16px;}
+  .hero h1 span{background:linear-gradient(135deg,var(--gold),var(--rose));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .hero p{font-size:1.1rem;color:var(--muted);max-width:600px;margin:0 auto 32px;}
+  .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .btn-primary{background:linear-gradient(135deg,var(--gold),var(--rose));color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;transition:opacity 0.3s,transform 0.2s;}
+  .btn-primary:hover{opacity:0.9;transform:translateY(-2px);}
+  .btn-outline{border:1px solid var(--gold);color:var(--gold);padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;transition:all 0.3s;}
+  .btn-outline:hover{background:rgba(196,142,33,0.1);}
+  .hero-stats{display:flex;gap:40px;justify-content:center;margin-top:56px;flex-wrap:wrap;}
+  .stat{text-align:center;}
+  .stat .num{font-size:2rem;font-weight:800;color:var(--gold);}
+  .stat .lbl{font-size:0.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+
+  /* SECTIONS */
+  section{padding:80px 20px;}
+  .container{max-width:1100px;margin:0 auto;}
+  .section-label{color:var(--gold);font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;}
+  .section-title{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;margin-bottom:16px;}
+  .section-title span{color:var(--rose);}
+  .section-sub{color:var(--muted);max-width:550px;margin-bottom:48px;}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+  @media(max-width:700px){.about-grid{grid-template-columns:1fr;}}
+  .about-card{background:var(--dark2);border:1px solid rgba(196,142,33,0.15);border-radius:16px;padding:32px;}
+  .about-card h3{color:var(--gold);margin-bottom:12px;font-size:1.1rem;}
+  .about-card p{color:var(--muted);font-size:0.95rem;line-height:1.8;}
+  .exp-list{list-style:none;margin-top:16px;}
+  .exp-list li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.9rem;display:flex;gap:10px;}
+  .exp-list li::before{content:'▸';color:var(--gold);}
+
+  /* SERVICES */
+  .services-bg{background:var(--dark2);}
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
+  .service-card{background:var(--dark3);border:1px solid rgba(196,142,33,0.12);border-radius:16px;padding:28px;transition:border-color 0.3s,transform 0.2s;}
+  .service-card:hover{border-color:var(--gold);transform:translateY(-4px);}
+  .svc-icon{font-size:2.2rem;margin-bottom:16px;}
+  .service-card h3{font-size:1.15rem;margin-bottom:10px;color:var(--light);}
+  .service-card p{color:var(--muted);font-size:0.9rem;margin-bottom:16px;}
+  .sub-services{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+  .sub-tag{background:rgba(191,103,95,0.15);border:1px solid rgba(191,103,95,0.3);color:var(--rose);padding:4px 12px;border-radius:20px;font-size:0.78rem;}
+
+  /* HOW IT WORKS */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-top:16px;}
+  .step{text-align:center;padding:32px 20px;}
+  .step-num{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--rose));display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;margin:0 auto 16px;}
+  .step h4{margin-bottom:8px;font-size:1rem;}
+  .step p{color:var(--muted);font-size:0.88rem;}
+
+  /* BOOK SERVICE */
+  .book-bg{background:var(--dark2);}
+  .book-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:start;}
+  @media(max-width:800px){.book-grid{grid-template-columns:1fr;}}
+  .book-info h3{color:var(--gold);margin-bottom:12px;}
+  .book-info p{color:var(--muted);font-size:0.9rem;line-height:1.8;margin-bottom:20px;}
+  .contact-item{display:flex;align-items:center;gap:12px;margin-bottom:12px;font-size:0.9rem;}
+  .contact-item .icon{color:var(--gold);font-size:1.1rem;}
+
+  /* FORM */
+  .form-card{background:var(--dark3);border:1px solid rgba(196,142,33,0.15);border-radius:16px;padding:32px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:4px;}
+  @media(max-width:500px){.form-row{grid-template-columns:1fr;}}
+  .form-group{margin-bottom:18px;}
+  .form-group label{display:block;font-size:0.85rem;color:var(--gold);margin-bottom:6px;letter-spacing:0.5px;}
+  .form-group input,.form-group select,.form-group textarea{width:100%;background:var(--dark2);border:1px solid rgba(196,142,33,0.2);color:var(--text);padding:11px 14px;border-radius:8px;font-size:0.9rem;outline:none;transition:border-color 0.3s;font-family:inherit;}
+  .form-group input:focus,.form-group select,.form-group textarea:focus{border-color:var(--gold);}
+  .form-group select{cursor:pointer;}
+  .form-group select option{background:var(--dark2);}
+  .form-group textarea{resize:vertical;min-height:90px;}
+
+  /* DOCUMENT CHECKLIST */
+  .doc-checklist{background:rgba(196,142,33,0.06);border:1px solid rgba(196,142,33,0.2);border-radius:10px;padding:16px;margin-bottom:18px;}
+  .doc-checklist h4{color:var(--gold);font-size:0.9rem;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .doc-checklist ul{list-style:none;}
+  .doc-checklist ul li{font-size:0.85rem;color:var(--muted);padding:5px 0;display:flex;align-items:center;gap:8px;}
+  .doc-checklist ul li::before{content:'☐';color:var(--rose);font-size:1rem;}
+  .coming-soon{color:var(--rose);font-style:italic;font-size:0.85rem;padding:8px 0;}
+
+  /* FILE UPLOAD */
+  .file-upload{border:2px dashed rgba(196,142,33,0.3);border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:border-color 0.3s;position:relative;}
+  .file-upload:hover{border-color:var(--gold);}
+  .file-upload input{position:absolute;inset:0;opacity:0;cursor:pointer;}
+  .file-upload p{color:var(--muted);font-size:0.85rem;}
+  .file-upload span{color:var(--gold);font-weight:600;}
+  .file-names{margin-top:8px;font-size:0.8rem;color:var(--rose);}
+
+  /* PAYMENT */
+  .payment-section{background:var(--dark);}
+  .payment-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+  @media(max-width:700px){.payment-grid{grid-template-columns:1fr;}}
+  .payment-card{background:var(--dark2);border:1px solid rgba(196,142,33,0.15);border-radius:16px;padding:28px;text-align:center;}
+  .payment-card h3{color:var(--gold);margin-bottom:16px;font-size:1rem;}
+  .upi-box{background:var(--dark3);border-radius:12px;padding:20px;margin:12px 0;}
+  .qr-placeholder{width:140px;height:140px;background:rgba(196,142,33,0.1);border:2px dashed rgba(196,142,33,0.3);border-radius:8px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.8rem;text-align:center;padding:10px;}
+  .upi-id{background:rgba(196,142,33,0.1);border:1px solid rgba(196,142,33,0.3);border-radius:8px;padding:10px 16px;font-family:monospace;color:var(--gold);font-size:1rem;margin-top:8px;display:inline-block;}
+  .bank-details{text-align:left;}
+  .bank-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.88rem;}
+  .bank-row .lbl{color:var(--muted);}
+  .bank-row .val{color:var(--light);font-weight:600;}
+
+  /* FOOTER */
+  footer{background:var(--dark2);border-top:1px solid rgba(196,142,33,0.15);padding:40px 20px;text-align:center;}
+  footer .logo{font-size:1.4rem;margin-bottom:12px;display:block;}
+  footer p{color:var(--muted);font-size:0.85rem;}
+  footer a{color:var(--gold);text-decoration:none;}
+  .footer-links{margin:16px 0;display:flex;gap:24px;justify-content:center;flex-wrap:wrap;}
+  .footer-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;transition:color 0.3s;}
+  .footer-links a:hover{color:var(--gold);}
+
+  /* SUBMIT BTN */
+  .btn-submit{width:100%;background:linear-gradient(135deg,var(--gold),var(--rose));color:#fff;border:none;padding:14px;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity 0.3s,transform 0.2s;letter-spacing:0.5px;}
+  .btn-submit:hover{opacity:0.9;transform:translateY(-1px);}
+
+  /* SUCCESS MSG */
+  .success-msg{display:none;background:rgba(196,142,33,0.1);border:1px solid var(--gold);border-radius:10px;padding:20px;text-align:center;color:var(--gold);margin-top:16px;}
+
+  /* DIVIDER */
+  .divider{width:60px;height:3px;background:linear-gradient(135deg,var(--gold),var(--rose));border-radius:2px;margin:12px 0 32px;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Neha Pujari</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#howitworks">Process</a>
+    <a href="#book">Book Service</a>
+    <a href="#payment">Payment</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-badge">✦ Professional Consultancy Services</div>
+    <h1>Your Trusted Partner in<br/><span>Dataflow, Prometric &<br/>AI Content Creation</span></h1>
+    <p>12+ years of expertise in HR, Administration & Recruitment. Now delivering specialized consultancy and creative AI-powered content solutions.</p>
+    <div class="hero-btns">
+      <a href="#book" class="btn-primary">📋 Book a Service</a>
+      <a href="#services" class="btn-outline">Explore Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="num">12+</div><div class="lbl">Years Experience</div></div>
+      <div class="stat"><div class="num">3</div><div class="lbl">Core Services</div></div>
+      <div class="stat"><div class="num">100%</div><div class="lbl">Dedicated Support</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">About Me</div>
+    <div class="divider"></div>
+    <div class="about-grid">
+      <div>
+        <div class="section-title">Neha Pujari<br/><span>Consultancy Professional</span></div>
+        <p style="color:var(--muted);font-size:0.95rem;line-height:1.9;">HR professional with over <strong style="color:var(--gold);">12 years of experience</strong> in HR coordination, administration, and recruitment. Skilled in talent acquisition, training coordination, project management, and employee engagement.</p>
+        <p style="color:var(--muted);font-size:0.95rem;line-height:1.9;margin-top:12px;">Currently offering specialized services in Dataflow verification, Prometric exam registration, and AI-powered content creation for businesses and individuals.</p>
+        <div style="margin-top:20px;display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="https://www.linkedin.com/in/nehapujari-45747572" target="_blank" class="btn-outline" style="padding:10px 20px;font-size:0.85rem;">🔗 LinkedIn Profile</a>
+          <a href="mailto:preetcute@gmail.com" class="btn-primary" style="padding:10px 20px;font-size:0.85rem;">✉️ Email Me</a>
+        </div>
+      </div>
+      <div>
+        <div class="about-card">
+          <h3>🏢 Professional Background</h3>
+          <ul class="exp-list">
+            <li>Self Employed – Dataflow, Prometric & AI Content (2025–Present)</li>
+            <li>Jerry Varghese Consultancy – Recruitment Executive (2016–2021)</li>
+            <li>Brainwave Science Academy – Office Coordinator (2012–2014)</li>
+            <li>Clover Infotech – Admin Assistant (2011)</li>
+          </ul>
+        </div>
+        <div class="about-card" style="margin-top:16px;">
+          <h3>🎓 Education & Certifications</h3>
+          <ul class="exp-list">
+            <li>PG Diploma in HRM – Symbiosis Institute</li>
+            <li>B.Sc. Computer Science – A.T. College, Pune</li>
+            <li>Certified Maestro Recruiter</li>
+            <li>Certified Human Resource Generalist</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services-bg">
+  <div class="container">
+    <div class="section-label">What I Offer</div>
+    <div class="divider"></div>
+    <div class="section-title">Core <span>Services</span></div>
+    <p class="section-sub">Specialized consulting and creative services tailored to your professional and business needs.</p>
+    <div class="services-grid">
+      <!-- Dataflow -->
+      <div class="service-card">
+        <div class="svc-icon">🔄</div>
+        <h3>Dataflow Consulting</h3>
+        <p>Expert guidance on Primary Source Verification (PSV) and Dataflow credential verification processes for healthcare and professional qualifications — especially for overseas employment.</p>
+        <div class="sub-services">
+          <span class="sub-tag">PSV Verification</span>
+          <span class="sub-tag">Document Review</span>
+          <span class="sub-tag">Status Tracking</span>
+          <span class="sub-tag">End-to-End Support</span>
+        </div>
+      </div>
+      <!-- Prometric -->
+      <div class="service-card">
+        <div class="svc-icon">📝</div>
+        <h3>Prometric Registration</h3>
+        <p>Complete assistance with Prometric exam registration for international licensing exams. From eligibility checks to scheduling — handled professionally and efficiently.</p>
+        <div class="sub-services">
+          <span class="sub-tag">Eligibility Check</span>
+          <span class="sub-tag">Exam Scheduling</span>
+          <span class="sub-tag">Gulf / Abroad Exams</span>
+          <span class="sub-tag">Follow-up Support</span>
+        </div>
+      </div>
+      <!-- AI Content -->
+      <div class="service-card">
+        <div class="svc-icon">🤖</div>
+        <h3>AI Content Creation</h3>
+        <p>High-quality AI-powered content creation for your brand, business, or personal projects across multiple formats and platforms.</p>
+        <div class="sub-services">
+          <span class="sub-tag">🎬 Advertise / Promo Video</span>
+          <span class="sub-tag">🌐 Website / App Content</span>
+          <span class="sub-tag">✍️ Blog / Writing</span>
+          <span class="sub-tag">💡 Other</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="howitworks">
+  <div class="container">
+    <div class="section-label">Simple Process</div>
+    <div class="divider"></div>
+    <div class="section-title">How It <span>Works</span></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Choose Your Service</h4>
+        <p>Select the service you need from Dataflow, Prometric, or AI Content Creation.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Fill the Booking Form</h4>
+        <p>Submit your details, requirements, and upload the required documents via the form.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Make Payment</h4>
+        <p>Complete payment via UPI or bank transfer. Share your screenshot for confirmation.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Work Begins!</h4>
+        <p>I'll get in touch within 24 hours and we start working on your requirements together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK SERVICE -->
+<section id="book" class="book-bg">
+  <div class="container">
+    <div class="section-label">Get Started</div>
+    <div class="divider"></div>
+    <div class="book-grid">
+      <div class="book-info">
+        <div class="section-title">Book a <span>Service</span></div>
+        <p>Fill in your details and I'll get back to you within 24 hours with a customized plan and pricing.</p>
+        <div class="contact-item"><span class="icon">✉️</span> preetcute@gmail.com</div>
+        <div class="contact-item"><span class="icon">📍</span> Bengaluru, Karnataka, India</div>
+        <div class="contact-item"><span class="icon">🔗</span> <a href="https://www.linkedin.com/in/nehapujari-45747572" target="_blank" style="color:var(--gold);">LinkedIn Profile</a></div>
+        <div style="margin-top:24px;background:rgba(196,142,33,0.07);border:1px solid rgba(196,142,33,0.2);border-radius:12px;padding:16px;">
+          <p style="font-size:0.85rem;color:var(--gold);font-weight:600;margin-bottom:6px;">📌 Document Submission Note</p>
+          <p style="font-size:0.83rem;color:var(--muted);">Please keep your documents ready before filling the form. The checklist will appear automatically based on your selected service.</p>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="fname" placeholder="Your full name"/>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" id="femail" placeholder="your@email.com"/>
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="fphone" placeholder="+91 XXXXX XXXXX"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="fphone" placeholder="+91 XXXXX XXXXX"/>
+          </div>
+          <div class="form-group">
+            <label>Country</label>
+            <input type="text" id="fcountry" placeholder="Your country"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Select Service *</label>
+          <select id="fservice" onchange="updateChecklist()">
+            <option value="">-- Choose a Service --</option>
+            <option value="dataflow">Dataflow Consulting</option>
+            <option value="prometric">Prometric Registration</option>
+            <option value="ai-video">AI Content – Advertise / Promotional Video</option>
+            <option value="ai-web">AI Content – Website / App Service</option>
+            <option value="ai-blog">AI Content – Blog / Writing Service</option>
+            <option value="ai-other">AI Content – Other</option>
+          </select>
+        </div>
+
+        <!-- DOCUMENT CHECKLIST -->
+        <div class="doc-checklist" id="docChecklist" style="display:none;">
+          <h4>📋 Required Documents Checklist</h4>
+          <ul id="docList"></ul>
+        </div>
+
+        <div class="form-group">
+          <label>Message / Requirements *</label>
+          <textarea id="fmsg" placeholder="Describe your requirements in detail..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Upload Documents</label>
+          <div class="file-upload">
+            <input type="file" id="ffiles" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" onchange="showFiles()"/>
+            <p>🗂️ <span>Click to upload</span> or drag & drop</p>
+            <p style="font-size:0.78rem;margin-top:4px;">PDF, JPG, PNG, DOC accepted</p>
+            <div class="file-names" id="fileNames"></div>
+          </div>
+        </div>
+
+        <button class="btn-submit" onclick="submitForm()">🚀 Submit Booking Request</button>
+        <div class="success-msg" id="successMsg">
+          ✅ <strong>Booking request received!</strong><br/>
+          Thank you! I'll reach out within 24 hours. Please complete the payment to confirm your booking.
+          <br/><a href="#payment" style="color:var(--gold);display:inline-block;margin-top:8px;">→ Proceed to Payment</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAYMENT -->
+<section id="payment" class="payment-section">
+  <div class="container">
+    <div class="section-label">Payment</div>
+    <div class="divider"></div>
+    <div class="section-title">Payment <span>Options</span></div>
+    <p class="section-sub">Complete your payment after submitting the booking form. Share your payment screenshot to confirm.</p>
+    <div class="payment-grid">
+      <!-- UPI -->
+      <div class="payment-card">
+        <h3>📱 UPI Payment</h3>
+        <div class="upi-box">
+          <div class="qr-placeholder">QR Code<br/>(Add your UPI QR here)</div>
+          <p style="color:var(--muted);font-size:0.82rem;margin-bottom:6px;">Or pay directly via UPI ID:</p>
+          <div class="upi-id">9890603793@ybl</div>
+          <p style="color:var(--muted);font-size:0.78rem;margin-top:10px;">⚠️ Please update UPI ID & QR with your actual details</p>
+        </div>
+        <p style="font-size:0.82rem;color:var(--muted);">After payment, email the screenshot to <strong style="color:var(--gold);">preetcute@gmail.com</strong> with your name & service.</p>
+      </div>
+      <!-- Bank Transfer -->
+      <div class="payment-card">
+        <h3>🏦 Bank Transfer (NEFT/IMPS)</h3>
+        <div class="bank-details" style="margin-top:12px;">
+          <div class="bank-row"><span class="lbl">Account Name</span><span class="val">Neha Pujari</span></div>
+          <div class="bank-row"><span class="lbl">Account Number</span><span class="val">XXXXXXXXXXXX</span></div>
+          <div class="bank-row"><span class="lbl">IFSC Code</span><span class="val">XXXXXXXX</span></div>
+          <div class="bank-row"><span class="lbl">Bank Name</span><span class="val">Your Bank Name</span></div>
+          <div class="bank-row"><span class="lbl">Branch</span><span class="val">Bengaluru, Karnataka</span></div>
+        </div>
+        <p style="font-size:0.8rem;color:var(--rose);margin-top:14px;">⚠️ Please update bank details with your actual account information.</p>
+        <p style="font-size:0.82rem;color:var(--muted);margin-top:8px;">After transfer, send confirmation to <strong style="color:var(--gold);">preetcute@gmail.com</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="logo">Neha<span style="color:var(--rose);">Pujari</span></span>
+  <p>Dataflow Consultant | Prometric Registration | AI Content Creator</p>
+  <p style="margin-top:4px;color:var(--muted);">📍 Bengaluru, Karnataka, India</p>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#book">Book Service</a>
+    <a href="#payment">Payment</a>
+    <a href="mailto:preetcute@gmail.com">✉️ preetcute@gmail.com</a>
+    <a href="https://www.linkedin.com/in/nehapujari-45747572" target="_blank">🔗 LinkedIn</a>
+  </div>
+  <p style="margin-top:16px;font-size:0.78rem;color:rgba(255,255,255,0.2);">© 2025 Neha Pujari Consultancy. All rights reserved.</p>
+</footer>
+
+<script>
+const docs = {
+  dataflow: {
+    status: 'coming',
+    label: 'Dataflow Consulting',
+    items: []
+  },
+  prometric: {
+    status: 'ready',
+    label: 'Prometric Registration',
+    items: [
+      'Valid Passport (clear scan – all pages)',
+      'Academic Certificates (Degree / Diploma)',
+      'Professional License / Registration Certificate',
+      'Eligibility Letter or Authorization (if applicable)',
+      'Exam Voucher / Scheduling Permit (if already obtained)',
+      'Passport-size Photograph (recent)',
+      'Emirates ID / National ID (for Gulf country exams)'
+    ]
+  },
+  'ai-video': {
+    status: 'ready',
+    label: 'Advertise / Promotional Video',
+    items: [
+      'Brand Logo (PNG/SVG high resolution)',
+      'Brand Color Codes & Font Preferences',
+      'Product/Service Description or Script (if any)',
+      'Reference Videos or Mood Board',
+      'Target Audience & Purpose of Video'
+    ]
+  },
+  'ai-web': {
+    status: 'ready',
+    label: 'Website / App Content',
+    items: [
+      'Business Name & Tagline',
+      'Brand Logo & Color Palette',
+      'List of Services / Products to feature',
+      'Existing Website URL (if redesign)',
+      'Preferred Tone (formal / casual / creative)'
+    ]
+  },
+  'ai-blog': {
+    status: 'ready',
+    label: 'Blog / Writing Service',
+    items: [
+      'Topic or Keyword List',
+      'Target Audience Description',
+      'Preferred Writing Style / Tone',
+      'Word Count Preference',
+      'Reference Articles or Links (optional)'
+    ]
+  },
+  'ai-other': {
+    status: 'ready',
+    label: 'Other AI Content',
+    items: [
+      'Detailed description of your content requirement',
+      'Any reference material or examples',
+      'Target platform (social media / print / web)',
+      'Deadline or urgency level'
+    ]
+  }
+};
+
+function updateChecklist() {
+  const val = document.getElementById('fservice').value;
+  const box = document.getElementById('docChecklist');
+  const list = document.getElementById('docList');
+  if (!val) { box.style.display = 'none'; return; }
+  const d = docs[val];
+  box.style.display = 'block';
+  if (d.status === 'coming') {
+    list.innerHTML = `<li style="color:var(--rose);font-style:italic;list-style:none;">📌 Document checklist for Dataflow Consulting will be shared shortly. Please contact via email for now: <strong>preetcute@gmail.com</strong></li>`;
+  } else {
+    list.innerHTML = d.items.map(i => `<li>${i}</li>`).join('');
+  }
+}
+
+function showFiles() {
+  const files = document.getElementById('ffiles').files;
+  const names = Array.from(files).map(f => f.name).join(', ');
+  document.getElementById('fileNames').textContent = names ? '✅ ' + names : '';
+}
+
+function submitForm() {
+  const name = document.getElementById('fname').value.trim();
+  const email = document.getElementById('femail').value.trim();
+  const phone = document.getElementById('fphone').value.trim();
+  const service = document.getElementById('fservice').value;
+  const msg = document.getElementById('fmsg').value.trim();
+  if (!name || !email || !phone || !service || !msg) {
+    alert('Please fill in all required fields (*)');
+    return;
+  }
+  const s = document.getElementById('successMsg');
+  s.innerHTML = `
+    <div style="font-size:2rem;margin-bottom:10px;">🎉</div>
+    <strong style="font-size:1.1rem;color:var(--gold);">Booking Confirmed!</strong><br/><br/>
+    Dear <strong>${name}</strong>, your booking has been successfully confirmed.<br/>
+    We will get in touch with you within <strong>24 hours</strong> to begin work.<br/><br/>
+    <span style="font-size:0.85rem;color:#999;">For any queries: <a href="mailto:preetcute@gmail.com" style="color:var(--gold);">preetcute@gmail.com</a></span>
+  `;
+  s.style.display = 'block';
+  document.querySelector('.btn-submit').disabled = true;
+  document.querySelector('.btn-submit').textContent = '✅ Booking Confirmed!';
+  document.querySelector('.form-card').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
